@@ -1,0 +1,8 @@
+# 1. 正则提取 ```json 包裹的 JSON 内容
+match = re.search(r"```json\s*(.*?)\s*```", raw_string, re.DOTALL)
+if match:
+    json_str = match.group(1)  # 只提取中间的 JSON 部分
+    data = json.loads(json_str)
+    print(data)
+else:
+    print("No valid JSON code block found.")
