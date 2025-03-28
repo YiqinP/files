@@ -6,3 +6,6 @@ if match:
     print(data)
 else:
     print("No valid JSON code block found.")
+
+
+r"```json\s*(.*?)(?:\s*```)?"
