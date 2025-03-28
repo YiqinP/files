@@ -9,3 +9,5 @@ else:
 
 
 r"```json\s*(.*?)(?:\s*```)?"
+
+cleaned = re.sub(r"^```json\s*|\s*```$", "", md_string.strip(), flags=re.DOTALL)
