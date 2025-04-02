@@ -1,13 +1,15 @@
-# 1. 正则提取 ```json 包裹的 JSON 内容
-match = re.search(r"```json\s*(.*?)\s*```", raw_string, re.DOTALL)
-if match:
-    json_str = match.group(1)  # 只提取中间的 JSON 部分
-    data = json.loads(json_str)
-    print(data)
-else:
-    print("No valid JSON code block found.")
+import matplotlib.pyplot as plt
 
+# 从 history 中取出 loss 和 val_loss
+train_loss = history.history['loss']
+val_loss = history.history['val_loss']
+epochs = range(1, len(train_loss) + 1)
 
-r"```json\s*(.*?)(?:\s*```)?"
-
-cleaned = re.sub(r"^```json\s*|\s*```$", "", md_string.strip(), flags=re.DOTALL)
+plt.plot(epochs, train_loss, label='Training Loss')
+plt.plot(epochs, val_loss, label='Validation Loss')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.title('Training and Validation Loss over Epochs')
+plt.legend()
+plt.grid(True)
+plt.show()
