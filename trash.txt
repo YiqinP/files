@@ -1,15 +1,17 @@
-import matplotlib.pyplot as plt
+import numpy as np
 
-# 从 history 中取出 loss 和 val_loss
-train_loss = history.history['loss']
-val_loss = history.history['val_loss']
-epochs = range(1, len(train_loss) + 1)
+# 假设 y_true_labels 和 y_pred_labels 都是 0/1 整数标签（不是概率）
+y_true_labels = np.array(y_true_labels)         # shape: (3300, 8)
+y_pred_labels = np.array(y_pred_labels)         # shape: (8, 3300)
 
-plt.plot(epochs, train_loss, label='Training Loss')
-plt.plot(epochs, val_loss, label='Validation Loss')
-plt.xlabel('Epochs')
-plt.ylabel('Loss')
-plt.title('Training and Validation Loss over Epochs')
-plt.legend()
-plt.grid(True)
-plt.show()
+# 转置预测结果，使其 shape = (3300, 8)
+y_pred_labels = y_pred_labels.T
+
+# 计算总体准确率（总共对了多少个 label / 总 label 数量）
+accuracy = np.mean(y_true_labels == y_pred_labels)
+print(f"Overall accuracy: {accuracy:.4f}")
+
+
+
+per_task_accuracy = np.mean(y_true_labels == y_pred_labels, axis=0)
+print("Per-task accuracy:", per_task_accuracy)
